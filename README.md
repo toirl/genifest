@@ -1,6 +1,6 @@
 # genifest
 
-Genifest generates Manifest Files for the Green Software Impact Framework by combining usage data from a server with a template file
+Genifest generates Manifest Files for the [Impact Framework](https://if.greensoftware.foundation) of the the [Green Software Foundation](https://greensoftware.foundation) by combining usage data from a server with a template file
 
 ## Installation
 
