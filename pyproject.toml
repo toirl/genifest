@@ -1,0 +1,97 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "genifest"
+version = "0.1.0"
+description = "Genifest generates Manifest Files for the Green Software Impact Framework by combining usage data from a server with a template file"
+readme = "README.md"
+
+authors = [{name = "Torsten Irländer", email = "torsten.irlaender@googlemail.com"}]
+requires-python = ">=3.9"
+license = {file = "LICENSE"}
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.9",
+]
+dependencies = [
+    "click",
+    "python_dotenv",
+    "structlog"
+]
+
+[project.optional-dependencies]
+development = [
+  # Testing
+  "pytest",
+  "pytest-cov",
+  "coverage[toml]",
+  "debugpy",
+  # Code-Style
+  "pre-commit",
+  "ruff",
+  # Packaging
+  "commitizen",
+  "twine",
+  "wheel",
+  "pip-licenses",
+  # Documentation
+  "mkdocs",
+  "mkdocs-mermaid2-plugin",
+  "mkdocstrings[python]",
+  "mkdocs-material"
+]
+
+[project.scripts]
+genifest = "genifest.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]  # list of folders that contain the packages (["."] by default)
+include = ["genifest*"]  # package names should match these glob patterns (["*"] by default)
+exclude = []  # exclude packages matching these glob patterns (empty by default)
+namespaces = true # to disable scanning PEP 420 namespaces (true by default)
+
+[tool.coverage.run]
+omit = [
+    # omit anything in a werkbank directory anywhere
+    "*/werkbank/*",
+    # omit this single file
+    "genifest/cli.py"
+]
+
+[tool.coverage.report]
+# Regexes for lines to exclude from consideration
+exclude_lines = [
+    # Have to re-enable the standard pragma
+    "pragma: no cover",
+    "if TYPE_CHECKING",
+    "@abstractmethod",
+    '^if __name__ == "__main__"',
+    "^from.*import",
+    "^import"
+]
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+tag_format = "v$version"
+version_type = "pep440"
+version_provider = "pep621"
+version_files = [
+    "pyproject.toml",
+    "sonar-project.properties:sonar.projectVersion"
+]
+update_changelog_on_bump = true
+major_version_zero = true
+
+[tool.ruff]
+line-length = 120  # E501
+
+[tool.ruff.lint]
+extend-select = [
+  "I",
+]
