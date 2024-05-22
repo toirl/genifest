@@ -5,23 +5,54 @@ Genifest generates Manifest Files for the Green Software Impact Framework by com
 ## Installation
 
 ```bash
+# Install node
+brew install node
+
+# Install prometheus and node_exporter.
+brew install prometheus
+brew install node_exporter
+
 cd genifest
 
-# Create a virtual environemt.
-python3.9 -m venv venv
+# Create a virtual environment.
+python3.12 -m venv venv
 source venv/bin/activate
 
 # Install package as editable including development requirements.
 make develop
-
-# After the repository is prepared commit this as your initial commit
-git add .
-git commit -m "Initial commit"
 ```
+
+## Usage
+
+### Data collection
+
+Start Prometheus in a new terminal window
+
+```sh
+prometheus --config.file=./prometheus.yaml
+```
+
+Start the first node_extractor in a new terminal window
+
+```sh
+node_exporter
+```
+
+Check `http://localhost:9090/targets?search=`. You should see to endpoints.
+
+### Generate a Manifest file
+
+With an activated virtual python environment call
+
+```sh
+genifest
+```
+
+To generate a `manifest-static.yaml` file.
 
 ## Development
 
-A lot of commong task during development are available using the `make` command.
+A lot of common tasks during development are available using the `make` command.
 Here is a list of available commands:
 
 ```bash
@@ -47,7 +78,7 @@ docker-run           Run docker container.
 
 This repository makes use of [pre-commit hooks](https://pre-commit.com)
 to automatically do some cleanup and enforce code style before something is
-actually commited.
+actually committed.
 
 ## Credit
 

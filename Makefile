@@ -49,6 +49,7 @@ install: clean ## Install the package to the active Python's site-packages.
 
 develop: clean ## Install the package for local development.
 	[ ! -d .git ] && git init || echo "Git repository already exists"
+	npm install ## Install IF only for development
 	pip install --upgrade pip
 	pip install -e ".[development]"
 	pip freeze | grep -v git+ssh > docker/requirements.txt

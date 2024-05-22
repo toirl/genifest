@@ -1,0 +1,22 @@
+name:
+description:
+tags:
+initialize:
+  plugins:
+    <PLUGIN-NAME-HERE>:
+      method:
+      path:
+tree:
+  children:
+    localhost:
+      pipeline:
+        -
+      config:
+      defaults:
+      inputs:
+    127.0.0.1:
+      pipeline:
+        -
+      config:
+      defaults:
+      inputs:

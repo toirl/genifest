@@ -9,7 +9,7 @@ description = "Genifest generates Manifest Files for the Green Software Impact F
 readme = "README.md"
 
 authors = [{name = "Torsten Irländer", email = "torsten.irlaender@googlemail.com"}]
-requires-python = ">=3.9"
+requires-python = ">=3.12"
 license = {file = "LICENSE"}
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -50,7 +50,7 @@ development = [
 ]
 
 [project.scripts]
-genifest = "genifest.cli:main"
+genifest = "genifest.cli:cli"
 
 [tool.setuptools.packages.find]
 where = ["."]  # list of folders that contain the packages (["."] by default)
