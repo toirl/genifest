@@ -1,22 +1,28 @@
-name:
-description:
+name: Slashcarbon
+description: This is a simple testfile
 tags:
 initialize:
   plugins:
-    <PLUGIN-NAME-HERE>:
-      method:
-      path:
+    teads-curve:
+      path: "@grnsft/if-unofficial-plugins"
+      method: TeadsCurve
+      global-config:
+        interpolation: spline
+  outputs:
+    - yaml
 tree:
+  defaults:
+    cpu/thermal-design-power: 100
   children:
     localhost:
       pipeline:
-        -
+        - teads-curve
       config:
       defaults:
       inputs:
     127.0.0.1:
       pipeline:
-        -
+        - teads-curve
       config:
       defaults:
       inputs:

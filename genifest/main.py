@@ -25,9 +25,11 @@ def get_data(url: str, params: dict) -> dict:
         # Daten verarbeiten und Zeitstempel in ISO-Format umwandeln
         for result in data["data"]["result"]:
             for value in result["values"]:
-                timestamp = value[0]
+                timestamp = value[0]  # unix timestamp
+                cpu_util = float(value[1])  # cpu-util as string
                 iso_time = datetime.fromtimestamp(timestamp, UTC).isoformat()
                 value[0] = iso_time
+                value[1] = cpu_util
         return data
     else:
         print("Fehler bei der Abfrage:", response.status_code)
@@ -69,7 +71,7 @@ def _get_node_usage(node: dict) -> list[dict]:
         duration = duration
 
         # See minimal structure at https://if.greensoftware.foundation/users/how-to-write-manifests#inputs
-        usage.append({"timestamp": timestamp, "duration": duration, "cpu-util": cpu_util})
+        usage.append({"timestamp": timestamp, "duration": duration, "cpu/utilization": cpu_util})
     return usage
 
 
@@ -77,5 +79,5 @@ def main(path_manifest_template: str, url: str, params: dict, path_manifest_stat
     template = load_yaml_file(path_manifest_template)
     data = get_data(url, params)
     manifest = generate_manifest(template, data)
-    print(manifest)
+    print(yaml.dump(manifest))
     # write_yaml_file(path_manifest_static, manifest)

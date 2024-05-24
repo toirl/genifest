@@ -45,10 +45,16 @@ Check `http://localhost:9090/targets?search=`. You should see to endpoints.
 With an activated virtual python environment call
 
 ```sh
-genifest
+python genifest/cli.py > manifest-static.yaml
 ```
 
 To generate a `manifest-static.yaml` file.
+
+### Calculate manifest file
+
+```sh
+npx ie --manifest manifest-static.yaml --output manifest-computed
+```
 
 ## Development
 
