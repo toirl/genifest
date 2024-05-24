@@ -45,7 +45,7 @@ Check `http://localhost:9090/targets?search=`. You should see to endpoints.
 With an activated virtual python environment call
 
 ```sh
-python genifest/cli.py > manifest-static.yaml
+genifest --template manifest-template.yaml
 ```
 
 To generate a `manifest-static.yaml` file.

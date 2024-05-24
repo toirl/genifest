@@ -1,7 +1,6 @@
 """Console script for genifest"""
 
 import sys
-from datetime import UTC, datetime, timedelta
 
 import click
 
@@ -12,31 +11,19 @@ logger = get_logger()
 
 # Names of manifest files
 path_manifest_template = "./manifest-template.yaml"
-path_manifest_static = "./manifest-static.yaml"
-
-# URL für die Prometheus-API-Abfrage
-url = "http://localhost:9090/api/v1/query_range"  # Daten über einen Zeitraum
-
-# Zeitstempel für den Start und das Ende des Zeitbereichs
-end_time = datetime.now(tz=UTC)
-start_time = end_time - timedelta(hours=1)
-
-# Abfrageparameter
-query = "100 * (1 - avg by (instance) (rate(node_cpu_seconds_total{mode='idle'}[1m])))"
-params = {
-    "query": query,
-    "start": start_time.strftime("%Y-%m-%dT%H:%M:%SZ"),
-    "end": end_time.strftime("%Y-%m-%dT%H:%M:%SZ"),
-    "step": "60s",  # Schrittweite der Abfrage (1 Minute)
-}
 
 
 @click.command()
+@click.option("-h", "--host", default="http://localhost:9090", help="Host of the data provider", show_default=True)
+@click.option("-o", "--output", help="Path to the generate manifest file. If None is provided result goes to stdout")
+@click.option(
+    "-t", "--template", default=path_manifest_template, help="Path to the manifest template file", required=True
+)
 @click.option("-v", "--verbosity", default=0, count=True, help="Verbosity of logging")
-def cli(verbosity: int, args=None):
+def cli(host: str, verbosity: int, output: str, template: str, args=None):
     """Console script for genifest"""
     setup_logging(verbosity=verbosity)
-    main(path_manifest_template, url, params, path_manifest_static)
+    main(template, host, output)
     return 0
 
 

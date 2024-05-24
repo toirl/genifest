@@ -3,26 +3,38 @@ description: This is a simple testfile
 tags:
 initialize:
   plugins:
+    # Interpolates power based on CPU usage
+    # Requires
+    # - cpu/thermal-design-power for each machine as power consumption at 100% CPU
     teads-curve:
       path: "@grnsft/if-unofficial-plugins"
       method: TeadsCurve
       global-config:
         interpolation: spline
+    # Interpolates power based on MEM usage
+    # Requires
+    # - memory/utilization: Total memory used in the timeframe
+    # - memory/capacity: Total memory available
+    e-mem:
+      method: EMem
+      path: "@grnsft/if-plugins"
   outputs:
     - yaml
 tree:
   defaults:
-    cpu/thermal-design-power: 100
+    cpu/thermal-design-power: 40
   children:
     localhost:
       pipeline:
         - teads-curve
+        - e-mem
       config:
       defaults:
       inputs:
     127.0.0.1:
       pipeline:
         - teads-curve
+        - e-mem
       config:
       defaults:
       inputs:
