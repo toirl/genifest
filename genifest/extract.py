@@ -7,8 +7,8 @@ from genifest.transform import DataResult
 
 queries = {
     "cpu-usage": 'label_replace(100 * (1 - avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[1m]))), "metric", "cpu-usage", "", "")',
-    "mem-total": 'label_replace(node_memory_total_bytes, "metric", "mem-total", "", "")',
-    "mem-free": 'label_replace((node_memory_active_bytes/node_memory_total_bytes*100), "metric", "mem-free", "", "")',
+    "mem-total": 'label_replace((node_memory_total_bytes/1024/1024/1024), "metric", "mem-total", "", "")',
+    "mem-free": 'label_replace(((node_memory_active_bytes/1024/1024/1024)/(node_memory_total_bytes/1024/1024/1024)*100), "metric", "mem-free", "", "")',
 }
 
 
