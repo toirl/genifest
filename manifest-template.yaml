@@ -24,6 +24,9 @@ initialize:
     sci-m:
       method: SciM
       path: "@grnsft/if-plugins"
+    sci-o:
+      method: SciO
+      path: "@grnsft/if-plugins"
   outputs:
     - yaml
 tree:
@@ -33,6 +36,7 @@ tree:
     device/expected-lifespan: 94608000 # 3 years in seconds
     resources-total: 1 # I guess CPU available
     resources-reserved: 1 # I guess CPU reseverd for the application
+    grid/carbon-intensity: 500 # Quick calculation on data from electicity maps
   children:
     localhost:
       pipeline:
@@ -40,6 +44,7 @@ tree:
         - e-mem
         - sci-e
         - sci-m
+        - sci-o
       config:
       defaults:
       inputs:
@@ -49,6 +54,7 @@ tree:
         - e-mem
         - sci-e
         - sci-m
+        - sci-o
       config:
       defaults:
       inputs:
