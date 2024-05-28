@@ -27,6 +27,12 @@ initialize:
     sci-o:
       method: SciO
       path: "@grnsft/if-plugins"
+    sci:
+      method: Sci
+      path: "@grnsft/if-plugins"
+      global-config:
+        functional-unit: "duration" # Here will generate a SCI/second
+        functional-unit-time: "1 minute" # Must be equal to the observation timetrame
   outputs:
     - yaml
 tree:
@@ -45,6 +51,7 @@ tree:
         - sci-e
         - sci-m
         - sci-o
+        - sci
       config:
       defaults:
       inputs:
@@ -55,6 +62,7 @@ tree:
         - sci-e
         - sci-m
         - sci-o
+        - sci
       config:
       defaults:
       inputs:
