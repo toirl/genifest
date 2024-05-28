@@ -18,6 +18,9 @@ initialize:
     e-mem:
       method: EMem
       path: "@grnsft/if-plugins"
+    sci-e:
+      method: SciE
+      path: "@grnsft/if-plugins"
   outputs:
     - yaml
 tree:
@@ -28,6 +31,7 @@ tree:
       pipeline:
         - teads-curve
         - e-mem
+        - sci-e
       config:
       defaults:
       inputs:
@@ -35,6 +39,7 @@ tree:
       pipeline:
         - teads-curve
         - e-mem
+        - sci-e
       config:
       defaults:
       inputs:
