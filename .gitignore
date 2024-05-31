@@ -6,8 +6,6 @@
 
 # Datadir from the promentheus server
 data
-manifest-static.yaml
-manifest-computed.yaml
 
 ### Node ###
 # Logs
