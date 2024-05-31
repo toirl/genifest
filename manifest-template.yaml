@@ -35,7 +35,6 @@ initialize:
         functional-unit-time: "1 second"
   outputs:
     - yaml
-    - csv
 tree:
   defaults:
     cpu/thermal-design-power: 20 # Taken from notebookcheck.com
