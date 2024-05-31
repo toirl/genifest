@@ -1,5 +1,5 @@
-name: Slashcarbon
-description: This is a simple testfile
+name: Genifest example Template
+description: Example calculation for Apple M2
 tags:
 initialize:
   plugins:
@@ -32,17 +32,18 @@ initialize:
       path: "@grnsft/if-plugins"
       global-config:
         functional-unit: "duration" # Here will generate a SCI/second
-        functional-unit-time: "1 minute" # Must be equal to the observation timetrame
+        functional-unit-time: "1 second"
   outputs:
     - yaml
+    - csv
 tree:
   defaults:
-    cpu/thermal-design-power: 40
-    device/emissions-embodied: 147000 # gCO2eq for Apple M2 256GB
+    cpu/thermal-design-power: 20 # Taken from notebookcheck.com
+    device/emissions-embodied: 167000 # gCO2eq for Apple M2 256GB (product pdf)
     device/expected-lifespan: 94608000 # 3 years in seconds
     resources-total: 1 # I guess CPU available
     resources-reserved: 1 # I guess CPU reseverd for the application
-    grid/carbon-intensity: 500 # Quick calculation on data from electicity maps
+    grid/carbon-intensity: 434 # gCO2/kWh according to Umweltbundesamt in 2022 for Germany
   children:
     localhost:
       pipeline:
